@@ -31,30 +31,33 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float horiz = Input.GetAxis("Horizontal");
-        int input = 0;
-
-        if(jump == true && Input.GetKeyDown("space"))
-        {
-
-            rBody.AddForce(new Vector2(0,jumpHeight));
-            //vert = this.transform.position.y + jumpHeight;
-            input++;
-        }
-
-        if(input >= 2)
-        {
-            jump = false;
-        }
+        float vert = Input.GetAxis("Vertical");
 
 
-        // Debug.Log("H: " + horiz + " , V: " + vert);
-        Vector2 newVelocity = new Vector2(horiz, vert );
+        Vector2 newVelocity = new Vector2(horiz, vert);
 
         rBody.velocity = newVelocity * speed;
 
-        //animator.SetFloat("direction x", newVelocity.x);
-        //animator.SetFloat("direction y", newVelocity.y);
+        if (jump == true && Input.GetKeyDown("space"))
+        {
 
+            for(int i = 0; i < 10; i+= 10)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100), ForceMode2D.Impulse);
+            }
+            
+            jump = false;
+
+        }
+       
+
+       
+
+
+      
+
+
+       
         if(rBody.velocity.x < 0 && isRight)
         {
             Flip();
