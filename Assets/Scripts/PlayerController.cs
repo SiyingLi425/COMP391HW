@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         float horiz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
-
+        
 
         Vector2 newVelocity = new Vector2(horiz, vert);
 
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
             for(int i = 0; i < 10; i+= 10)
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100), ForceMode2D.Impulse);
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 200), ForceMode2D.Impulse);
             }
             
             jump = false;
@@ -74,6 +74,18 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "Ground")
         {
             jump = true;
+        }
+
+        if (other.tag == "Death")
+        {
+            Destroy(this.gameObject);
+            Debug.Log("GAME OVER");
+
+        }
+
+        if (other.tag == "Goal")
+        {
+            Debug.Log("CONGRATULATIONS");
         }
     }
 
