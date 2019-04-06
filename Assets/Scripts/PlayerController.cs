@@ -31,32 +31,36 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float horiz = Input.GetAxis("Horizontal");
-        float vert = Input.GetAxis("Vertical");
+        float vert = 0;
+        //float vert = Input.GetAxis("Vertical");
         
 
-        Vector2 newVelocity = new Vector2(horiz, vert);
+        // Vector2 newVelocity = new Vector2(horiz, vert);
 
-        rBody.velocity = newVelocity * speed;
+        // rBody.velocity = newVelocity * speed;
 
-        if (jump == true && Input.GetKeyDown("space"))
+        if (jump && Input.GetKeyDown(KeyCode.Space))
         {
 
-            for(int i = 0; i < 10; i+= 10)
-            {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 200), ForceMode2D.Impulse);
-            }
-            
+            //for(int i = 0; i < 10; i+= 10)
+            //{
+            //    gameObject.transform.Translate(Vector3.up * 200 * Time.deltaTime);
+            //    //GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 200), ForceMode2D.Impulse);
+            //}
             jump = false;
+            rBody.AddForce(new Vector2(0.0f, jumpHeight));
+            
+            
 
         }
-       
-
-       
 
 
-      
 
 
+
+
+
+        rBody.velocity = new Vector2(horiz * speed, rBody.velocity.y);
        
         if(rBody.velocity.x < 0 && isRight)
         {
@@ -79,6 +83,8 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Death")
         {
             Destroy(this.gameObject);
+            //Vector2 respawn = new Vector2(0, 0);
+            //rBody.velocity = respawn * speed;
             Debug.Log("GAME OVER");
 
         }
@@ -87,6 +93,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("CONGRATULATIONS");
         }
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        jump = true;
     }
 
     private void Flip()
