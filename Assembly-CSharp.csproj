@@ -60,6 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DogMovement.cs" />
+    <Compile Include="Assets\Scripts\LeafScript.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SUPEREASYCAMERAFOLLOWSCRIPTLOL.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
